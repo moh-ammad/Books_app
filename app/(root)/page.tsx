@@ -1,7 +1,9 @@
+import { auth } from "@/auth";
 import SearchForm from "@/components/SearchForm";
 import StartUpCard, { StartupTypeCard } from "@/components/startupcard";
 import { sanityFetch } from "@/sanity/lib/live";
 import { STARTUP_QUERY } from "@/sanity/lib/queries";
+import { getToken } from "next-auth/jwt";
 
 interface searchParams {
   query?: string;
@@ -16,6 +18,8 @@ export default async function Home(
     query:STARTUP_QUERY,
     params,
   })
+
+
 
   return (
     <>

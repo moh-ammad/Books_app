@@ -19,8 +19,9 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.95.0",
+    "@sanity/image-url": "1",
+    "@sanity/vision": "3",
+    "@uiw/react-md-editor": "^4.0.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "easymde": "^2.20.0",
@@ -28,14 +29,17 @@
     "markdown-it": "^14.1.0",
     "next": "15.4.0-canary.103",
     "next-auth": "5.0.0-beta.28",
-    "next-sanity": "^9.12.0",
+    "next-sanity": "9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanity": "^3.95.0",
+    "react-hot-toast": "^2.5.2",
+    "sanity": "3",
     "sanity-plugin-markdown": "^5.1.1",
     "server-only": "^0.0.1",
-    "styled-components": "^6.1.19",
-    "tailwind-merge": "^3.3.1"
+    "slugify": "^1.6.6",
+    "styled-components": "6",
+    "tailwind-merge": "^3.3.1",
+    "zod": "3.26.0-canary.20250703T215303"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

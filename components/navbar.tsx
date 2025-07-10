@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signOut, signIn } from "@/auth";
+import { Button } from "./ui/button";
+import { Plus } from "lucide-react";
 
 const Navbar = async () => {
   const session = await auth();
@@ -16,8 +18,18 @@ const Navbar = async () => {
           {session && session?.user ? (
             <>
               <Link href="/startup/create">
+             <Button className="rounded-full md:hidden bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+              <Plus className="size-6"/>
+             </Button>
                 <span className="max-sm:hidden cursor-pointer">Create</span>
               </Link>
+              {/* <Link href="/startup/create">
+                <Button className="rounded-full md:hidden bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                  <Plus className="size-6" />
+                </Button>
+                <span className="max-sm:hidden cursor-pointer">Create</span>
+              </Link> */}
+
 
               <form
                 action={async () => {
@@ -36,7 +48,7 @@ const Navbar = async () => {
                   {session?.user?.name || session?.user?.email}
                 </span>
                 <Image
-                  src={session?.user?.image || "/default-avatar.png"}
+                  src={session?.user?.image || "/avatar.png"}
                   alt="avatar"
                   width={30}
                   height={30}
@@ -52,7 +64,7 @@ const Navbar = async () => {
                 await signIn("github");
               }}
             >
-              <button type="submit">Login</button>
+              <button type="submit" className="cursor-pointer">Login</button>
             </form>
           )}
         </div>

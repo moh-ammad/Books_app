@@ -4,20 +4,24 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 import markdownit from 'markdown-it';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import View from '@/components/View';
+import { client } from '@/sanity/lib/client';
 
 export const experimental_ppr= true;
 
 const StartUpPage =async(
-    {params}: {params: {id: string}}
+    {params}: {params: Promise<{id: string}>}
 ) => {
 
     const md = markdownit();
 
     const {id}=await params;
-    const {data:post}=await sanityFetch({
-        query:STARTUP_BY_ID_QUERY,
-        params: {id}
-    })
+    const post=await client.fetch(
+        STARTUP_BY_ID_QUERY,
+        {id}
+    )
 
     const parsedContent = md.render(post?.pitch || "");
 
@@ -35,18 +39,18 @@ const StartUpPage =async(
     </section>
     <section className="section_container">
       <img
-          src={post.image}
+          src={post?.image||"/avatar.png"}
           alt="thumbnail"
-          className="w-full h-auto rounded-xl"
+          className="w-full h-auto max-h-[500px] rounded-xl"
         />
       <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <div className="flex-between gap-5">
             <Link
-              href={`/user/${post.author?._id}`}
+              href={`/user/${post?.author._id}`}
               className="flex gap-2 items-center mb-3"
             >
               <Image
-                src={post.author.image}
+                src={post?.author.image || "/avatar.png"}
                 alt="avatar"
                 width={64}
                 height={64}
@@ -54,14 +58,14 @@ const StartUpPage =async(
               />
 
               <div>
-                <p className="text-20-medium">{post.author.name}</p>
+                <p className="text-20-medium">{post?.author.name}</p>
                 <p className="text-16-medium !text-black-300">
-                  @{post.author.username}
+                  @{post?.author.username}
                 </p>
               </div>
             </Link>
 
-            <p className="category-tag">{post.category}</p>
+            <p className="category-tag">{post?.category}</p>
 
           </div>
            <h3 className="text-30-bold">Pitch Details</h3>
@@ -75,7 +79,9 @@ const StartUpPage =async(
           )}
           </div>
           <hr className="divider" />
-          
+          <Suspense fallback={<Skeleton className="view_skeleton" />}>
+          <View id={id} />
+        </Suspense>
     </section>
     </>
   )

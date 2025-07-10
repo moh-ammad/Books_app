@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import 'easymde/dist/easymde.min.css';
 import { SanityLive } from "@/sanity/lib/live";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -81,6 +82,7 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} antialiased`}
       >
+        <Toaster position="bottom-right"/>
         {children}
         <SanityLive/>
       </body>
