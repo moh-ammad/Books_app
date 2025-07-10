@@ -23,14 +23,6 @@ const Navbar = async () => {
              </Button>
                 <span className="max-sm:hidden cursor-pointer">Create</span>
               </Link>
-              {/* <Link href="/startup/create">
-                <Button className="rounded-full md:hidden bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-                  <Plus className="size-6" />
-                </Button>
-                <span className="max-sm:hidden cursor-pointer">Create</span>
-              </Link> */}
-
-
               <form
                 action={async () => {
                   "use server";
