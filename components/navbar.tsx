@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { auth, signOut, signIn } from "@/auth";
 import { Button } from "./ui/button";
-import { Plus } from "lucide-react";
+import { BadgePlus, LogOut, Plus } from "lucide-react";
 
 const Navbar = async () => {
   const session = await auth();
@@ -18,10 +18,8 @@ const Navbar = async () => {
           {session && session?.user ? (
             <>
               <Link href="/startup/create">
-             <Button className="rounded-full md:hidden bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-              <Plus className="size-6"/>
-             </Button>
-                <span className="max-sm:hidden cursor-pointer">Create</span>
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden" />
               </Link>
               <form
                 action={async () => {
@@ -30,12 +28,13 @@ const Navbar = async () => {
                   await signOut({ redirectTo: "/" });
                 }}
               >
-                <button type="submit">
-                  <span className="max-sm:hidden cursor-pointer">Logout</span>
+                   <button type="submit">
+                  <span className="max-sm:hidden">Logout</span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
                 </button>
               </form>
 
-              <Link href={`/user/${session?.user?.id}`} className="flex items-center gap-2">
+              <Link href={`/user/${session?.id}`} className="flex items-center gap-2">
                 <span className="max-sm:hidden cursor-pointer">
                   {session?.user?.name || session?.user?.email}
                 </span>
