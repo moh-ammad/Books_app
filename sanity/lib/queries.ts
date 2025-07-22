@@ -1,23 +1,23 @@
 import { defineQuery } from "next-sanity";
 
-export const STARTUP_QUERY=defineQuery(`*[_type == "startup" &&
+export const STARTUP_QUERY = defineQuery(`*[_type == "startup" &&
    defined(slug.current) && 
    !defined($search)
    || title match $search 
    || category match $search 
    || author->name match $search ]
    |order(_createdAt desc) {
-  _id,
+    _id,
     title,
     slug,
     _createdAt,
+    author->{
+     _id,name,image,bio
+    },
      views,
   category,
     description,
     image,
-  author->{
-   _id,name,image,username,bio
-  },
  
 }`
 )
@@ -89,21 +89,24 @@ export const PLAYLIST_BY_SLUG_QUERY =
   title,
   slug,
   select[]->{
+  _id,
+  _type,
+  _createdAt,
+  _updatedAt,
+  _rev,
+  title,
+  slug,
+  author->{
     _id,
-    _createdAt,
-    title,
+    name,
     slug,
-    author->{
-      _id,
-      name,
-      slug,
-      image,
-      bio
-    },
-    views,
-    description,
-    category,
     image,
-    pitch
-  }
+    bio
+  },
+  views,
+  description,
+  category,
+  image,
+  pitch
+}
 }`);

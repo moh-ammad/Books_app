@@ -97,7 +97,7 @@ export async function handleStartupForm(
 
     return {
       success: true,
-      message: "Form submitted successfully",
+      message: "Startup submitted successfully",
       startupId: result._id, // pass back the new startup id here
     };
   } catch (error) {

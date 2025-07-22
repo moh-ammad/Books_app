@@ -6,7 +6,7 @@ import { Button } from "./ui/button"
 import { Author, Startup } from "@/sanity/types"
 import { Skeleton } from "./ui/skeleton"
 
-export type StartupTypeCard = Omit<Startup,"author"> & {author?:Author}  
+export type StartupTypeCard = Omit<Startup,'author'> & {author?:Author}  
 
 
 const StartUpCard = (
