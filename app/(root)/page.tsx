@@ -3,7 +3,6 @@ import SearchForm from "@/components/SearchForm";
 import StartUpCard, { StartupTypeCard } from "@/components/startupcard";
 import { sanityFetch } from "@/sanity/lib/live";
 import { STARTUP_QUERY } from "@/sanity/lib/queries";
-import { getToken } from "next-auth/jwt";
 
 interface searchParams {
   query?: string;
@@ -44,8 +43,8 @@ export default async function Home(
       <ul className="mt-7 card_grid">
       {
         posts.length>0?(
-          posts.map((post:StartupTypeCard,index:number)=>(
-            <StartUpCard key={post._createdAt} post={post}/>
+          posts.map((post,index:number)=>(
+            <StartUpCard key={post._createdAt} post={post as StartupTypeCard}/>
           ))
         ):(
           <p className="no-result">

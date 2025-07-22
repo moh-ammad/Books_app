@@ -22,13 +22,14 @@ const StartUpPage =async(
         STARTUP_BY_ID_QUERY,
         {id}
     )
+    console.log(post)
 
     const parsedContent = md.render(post?.pitch || "");
 
   return (
     <>
     <section className="pink_container !min-h-[230px] pattern">
-       <p className="tag tag-tri">{formatDate(post?._createdAt)}</p>
+       <p className="tag tag-tri">{formatDate(post?._createdAt||"2025-06-06T17:43:42Z")}</p>
 
       <h1 className="heading">
         {post?.title}
@@ -46,11 +47,11 @@ const StartUpPage =async(
       <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <div className="flex-between gap-5">
             <Link
-              href={`/user/${post?.author._id}`}
+              href={`/user/${post?.author?._id}`}
               className="flex gap-2 items-center mb-3"
             >
               <Image
-                src={post?.author.image || "/avatar.png"}
+                src={post?.author?.image || "/avatar.png"}
                 alt="avatar"
                 width={64}
                 height={64}
@@ -58,9 +59,9 @@ const StartUpPage =async(
               />
 
               <div>
-                <p className="text-20-medium">{post?.author.name}</p>
+                <p className="text-20-medium">{post?.author?.name}</p>
                 <p className="text-16-medium !text-black-300">
-                  @{post?.author.username}
+                  @{post?.author?.username}
                 </p>
               </div>
             </Link>
