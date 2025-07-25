@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import 'easymde/dist/easymde.min.css';
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const workSans=localFont({
+const workSans = localFont({
   src: [
     {
       path: "./fonts/WorkSans-Black.ttf",
@@ -82,9 +83,10 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} antialiased`}
       >
-        <Toaster position="bottom-right"/>
+        <Toaster position="bottom-right" />
         {children}
-        <SanityLive/>
+        <SanityLive />
+        <SpeedInsights />
       </body>
     </html>
   );
